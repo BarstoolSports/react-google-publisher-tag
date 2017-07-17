@@ -245,6 +245,8 @@ export default class GooglePublisherTag extends Component {
       return;
     }
 
+    googletag.destroySlots([this.slot]);
+
     googletag.pubads().clear([this.slot]);
     this.slot = null;
 

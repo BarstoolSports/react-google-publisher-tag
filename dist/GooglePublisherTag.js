@@ -301,6 +301,8 @@ var GooglePublisherTag = function (_Component) {
         return;
       }
 
+      googletag.destroySlots([this.slot]);
+
       googletag.pubads().clear([this.slot]);
       this.slot = null;
 
