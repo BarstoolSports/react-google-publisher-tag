@@ -53,8 +53,6 @@ function loadScript() {
 function initGooglePublisherTag(props) {
   const exitAfterAddingCommands = !!googletag;
 
-  console.log('## Props: ', props);
-
   if (!googletag) {
     googletag = window.googletag = window.googletag || {};
     googletag.cmd = googletag.cmd || [];
