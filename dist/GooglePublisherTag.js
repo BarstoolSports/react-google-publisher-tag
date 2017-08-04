@@ -100,15 +100,17 @@ function initGooglePublisherTag(props) {
       onSlotRenderEnded = props.onSlotRenderEnded,
       path = props.path;
 
-  // Execute callback when the slot is visible in DOM (thrown before 'impressionViewable' )
 
+  var preset_id = props.id || false;
+
+  // Execute callback when the slot is visible in DOM (thrown before 'impressionViewable' )
   if (onSlotRenderEnded) {
     googletag.cmd.push(function () {
       googletag.pubads().addEventListener('slotRenderEnded', function (event) {
         // check if the current slot is the one the callback was added to
         // (as addEventListener is global)
         if (event.slot.getAdUnitPath() === path) {
-          onSlotRenderEnded(event);
+          onSlotRenderEnded(event, preset_id);
         }
       });
     });
@@ -119,7 +121,7 @@ function initGooglePublisherTag(props) {
     googletag.cmd.push(function () {
       googletag.pubads().addEventListener('impressionViewable', function (event) {
         if (event.slot.getAdUnitPath() === path) {
-          onImpressionViewable(event);
+          onImpressionViewable(event, preset_id);
         }
       });
     });
