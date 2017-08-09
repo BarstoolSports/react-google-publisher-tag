@@ -294,7 +294,7 @@ var GooglePublisherTag = function (_Component) {
 
       // display new slot
       googletag.display(id);
-      googletag.pubads().refresh([slot]);
+      //googletag.pubads().refresh([slot]);
     }
   }, {
     key: 'removeSlot',

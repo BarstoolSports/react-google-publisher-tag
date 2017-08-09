@@ -239,7 +239,7 @@ export default class GooglePublisherTag extends Component {
 
     // display new slot
     googletag.display(id);
-    googletag.pubads().refresh([slot]);
+    //googletag.pubads().refresh([slot]);
   }
 
   removeSlot() {
