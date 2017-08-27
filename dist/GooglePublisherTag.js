@@ -241,8 +241,9 @@ var GooglePublisherTag = function (_Component) {
       var windowWidth = window.innerWidth;
       var minWindowWidth = props.minWindowWidth,
           maxWindowWidth = props.maxWindowWidth,
-          targeting = props.targeting || false,
-          collapseEmptyDiv = props.collapseEmptyDiv,
+          collapseEmptyDiv = props.collapseEmptyDiv;
+
+      var targeting = props.targeting || false,
           forceRebuild = props.forceRebuild;
 
       if (minWindowWidth !== undefined && windowWidth < minWindowWidth) {
@@ -252,7 +253,7 @@ var GooglePublisherTag = function (_Component) {
       }
 
       if (JSON.stringify(targeting) !== JSON.stringify(this.currentTargeting)) {
-        forceRebuild = true
+        forceRebuild = true;
       }
 
       // do nothink

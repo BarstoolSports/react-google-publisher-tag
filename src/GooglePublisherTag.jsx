@@ -185,7 +185,9 @@ export default class GooglePublisherTag extends Component {
 
     // filter by min and max width
     const windowWidth = window.innerWidth;
-    const { minWindowWidth, maxWindowWidth, targeting, collapseEmptyDiv } = props;
+    const { minWindowWidth, maxWindowWidth, collapseEmptyDiv } = props;
+    let targeting = props.targeting || false,
+        forceRebuild = props.forceRebuild;
 
     if (minWindowWidth !== undefined && windowWidth < minWindowWidth) {
       dimensions = [];
@@ -193,8 +195,12 @@ export default class GooglePublisherTag extends Component {
       dimensions = [];
     }
 
+    if (JSON.stringify(targeting) !== JSON.stringify(this.currentTargeting)) {
+      forceRebuild = true
+    }
+
     // do nothink
-    if (JSON.stringify(dimensions) === JSON.stringify(this.currentDimensions)) {
+    if (JSON.stringify(dimensions) === JSON.stringify(this.currentDimensions) && !forceRebuild) {
       return;
     }
 
@@ -224,7 +230,11 @@ export default class GooglePublisherTag extends Component {
       Object.keys(targeting).forEach((key) => {
         slot.setTargeting(key, targeting[key]);
       });
+    } else {
+      googletag.pubads().clearTargeting();
     }
+
+    this.currentTargeting = targeting;
 
     // set collapsing
     if (typeof collapseEmptyDiv !== 'undefined') {
@@ -239,7 +249,7 @@ export default class GooglePublisherTag extends Component {
 
     // display new slot
     googletag.display(id);
-    //googletag.pubads().refresh([slot]);
+    googletag.pubads().refresh([slot]);
   }
 
   removeSlot() {
